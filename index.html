@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Bondowoso Covid-19 Map</title>
+  <meta name="viewport" content="initial-scale=1.0">
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="main.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+  <script src="initMarkerDaerah.js"></script>
+</head>
+
+
+
+<body>
+
+
+
+  <div class="modal fade" id="instructionModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content text-center">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Corona (COVID-19 Virus) Map <br> Bondowoso</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <h4>Penggunaan:</h4>
+          <p>1. Pilih daerah yang ingin dilihat datanya.</p>
+          <p>2. Tekan tombol pilih.</p>
+          <p>3. Data Akan muncul.</p>
+        </div>
+        <div class="modal-body">
+          <h4>Reference:</h4>
+              Data API link: <a href="http://rickyirfandi.com/covid19/data/bondowoso/">http://rickyirfandi.com/covid19/data/bondowoso/</a>
+              <br>Data per 23 Maret 2020 - Pukul 13.00
+          <br><br><a href="mailto:rickyirfandi@gmail.com">rickyirfandi@gmail.com</a>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="map" class="mapdiv"></div>
+  <div class="conatiner" id="intractionBox">
+    <div class="form-group my-2 text-center ">
+      <select class="form-control mx-2" id="Kecamatan">
+        <option>Pilih Daerah</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <button type="button" class="btn btn-primary tbl-pilih" id="btnClick">Pilih</button>
+    </div>
+    <div class="form-group">
+      <div id="content"></div>
+    </div>
+  </div>
+
+  <script>
+    var map;
+
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: {
+          lat: -7.912528,
+          lng: 113.8221820
+        },
+        zoom: 14,
+        disableDefaultUI: true,
+      });
+      var geocoder = new google.maps.Geocoder();
+
+      console.log("Map is intialized: " + new Date());
+      document.getElementById('btnClick').addEventListener('click', function () {
+        console.log("Enter key is pressed: " + new Date());
+        geocodeAddress(geocoder, map);
+        setTimeout(scrollToBottom, 1000);
+      });
+
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPodOx_4C8n3TrzngrizGFUAm--Dgav7o&callback=initMap"
+    async defer></script>
+</body>
+
+</html>
